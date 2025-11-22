@@ -67,7 +67,7 @@ describe('Waypoint', () => {
       expect(container.querySelector('[data-testid="single-child"]')).toBeTruthy();
     });
 
-    it('wraps composite components in span', async () => {
+    it('wraps composite components in div', async () => {
       const CompositeComponent = () => <div data-testid="composite">Composite</div>;
 
       const { container } = await render(
@@ -76,7 +76,7 @@ describe('Waypoint', () => {
         </Waypoint>
       );
 
-      const wrapper = container.querySelector('span');
+      const wrapper = container.querySelector('div');
       expect(wrapper).toBeTruthy();
       expect(container.querySelector('[data-testid="composite"]')).toBeTruthy();
     });
