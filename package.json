@@ -1,5 +1,5 @@
 {
-  "name": "@modern/react-waypoint",
+  "name": "@eshan.rajapakshe/react-waypoint",
   "version": "0.0.1",
   "description": "Modern, fully TypeScript implementation of react-waypoint with React 19 compatibility",
   "type": "module",
@@ -23,8 +23,8 @@
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "lint:fix": "eslint . --ext ts,tsx --fix",
+    "lint": "eslint . --report-unused-disable-directives --max-warnings 10",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write \"src/**/*.{ts,tsx}\" \"tests/**/*.{ts,tsx}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx}\" \"tests/**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",

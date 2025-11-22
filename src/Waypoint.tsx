@@ -39,13 +39,10 @@ export function Waypoint({
   debug = false,
   children,
 }: WaypointProps) {
-  // SSR safety check
-  if (typeof window === 'undefined') {
-    return children ? <>{children}</> : null;
-  }
-
   const elementRef = useRef<HTMLElement | null>(null);
-  const [scrollableAncestor, setScrollableAncestor] = useState<Window | HTMLElement>(window);
+  const [scrollableAncestor, setScrollableAncestor] = useState<Window | HTMLElement>(
+    typeof window !== 'undefined' ? window : null as any
+  );
   const previousPositionRef = useRef<WaypointPosition>('invisible');
 
   // Get calculations hook
@@ -152,6 +149,11 @@ export function Waypoint({
     },
     [debug]
   );
+
+  // SSR safety check
+  if (typeof window === 'undefined') {
+    return children ? <>{children}</> : null;
+  }
 
   // Handle children
   if (!children) {

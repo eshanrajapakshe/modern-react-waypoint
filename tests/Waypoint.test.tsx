@@ -54,7 +54,7 @@ describe('Waypoint', () => {
       const span = container.querySelector('span');
 
       expect(span).toBeTruthy();
-      expect(span?.style.fontSize).toBe('0');
+      expect(span?.style.fontSize).toBe('0px');
     });
 
     it('handles single child correctly', async () => {

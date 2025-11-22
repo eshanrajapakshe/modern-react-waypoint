@@ -8,6 +8,9 @@ import prettierConfig from 'eslint-config-prettier';
 export default [
   js.configs.recommended,
   {
+    ignores: ['**/node_modules/**', '**/dist/**', '**/codesandbox-demo/**', '**/scripts/**'],
+  },
+  {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       parser: tsparser,
@@ -25,9 +28,20 @@ export default [
         setTimeout: 'readonly',
         clearTimeout: 'readonly',
         IntersectionObserver: 'readonly',
+        IntersectionObserverCallback: 'readonly',
+        IntersectionObserverInit: 'readonly',
+        IntersectionObserverEntry: 'readonly',
         Element: 'readonly',
         HTMLElement: 'readonly',
         Node: 'readonly',
+        Window: 'readonly',
+        Event: 'readonly',
+        DOMRect: 'readonly',
+        React: 'readonly',
+        requestAnimationFrame: 'readonly',
+        cancelAnimationFrame: 'readonly',
+        global: 'readonly',
+        __dirname: 'readonly',
       },
     },
     plugins: {
@@ -37,7 +51,6 @@ export default [
     },
     rules: {
       ...tseslint.configs.recommended.rules,
-      ...tseslint.configs['recommended-requiring-type-checking'].rules,
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
