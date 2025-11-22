@@ -1,0 +1,44 @@
+# Source files
+src/
+tests/
+demo/
+scripts/
+
+# Config files
+.gitignore
+.eslintrc*
+eslint.config.js
+tsconfig.json
+vite.config.ts
+vitest.config.ts
+
+# Documentation (keep README and LICENSE)
+PUBLISHING_GUIDE.md
+QUICK_PUBLISH.md
+
+# Example files
+example.tsx
+
+# Development
+node_modules/
+coverage/
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Misc
+*.swp
+*.swo
+*~
+.env*
+
