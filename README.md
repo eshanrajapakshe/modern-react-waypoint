@@ -1,9 +1,15 @@
 
-# @modern/react-waypoint
+# @eshan.rajapakshe/react-waypoint
 
 > Modern, fully TypeScript implementation of react-waypoint with React 19 compatibility
 
 A performant and reliable React component for executing callbacks when scrolling to an element. Built with TypeScript, powered by IntersectionObserver API, and optimized for React 19.
+
+## 🎮 Live Demo
+
+**[Try it on CodeSandbox →](https://codesandbox.io/p/sandbox/rrzv2n)**
+
+See interactive examples of lazy loading, scroll animations, infinite scroll, and more!
 
 ## ✨ Features
 
@@ -20,21 +26,21 @@ A performant and reliable React component for executing callbacks when scrolling
 ## 📦 Installation
 
 ```bash
-npm install @modern/react-waypoint
+npm install @eshan.rajapakshe/react-waypoint
 ```
 
 ```bash
-yarn add @modern/react-waypoint
+yarn add @eshan.rajapakshe/react-waypoint
 ```
 
 ```bash
-pnpm add @modern/react-waypoint
+pnpm add @eshan.rajapakshe/react-waypoint
 ```
 
 ## 🚀 Quick Start
 
 ```tsx
-import { Waypoint } from '@modern/react-waypoint';
+import { Waypoint } from '@eshan.rajapakshe/react-waypoint';
 
 function App() {
   return (
@@ -178,7 +184,7 @@ import type {
   WaypointPosition,
   WaypointCallbackProps,
   WaypointProps
-} from '@modern/react-waypoint';
+} from '@eshan.rajapakshe/react-waypoint';
 
 // Position type
 type WaypointPosition = 'above' | 'inside' | 'below' | 'invisible';
@@ -197,7 +203,7 @@ interface WaypointCallbackProps {
 ### Position Constants
 
 ```tsx
-import { POSITIONS } from '@modern/react-waypoint';
+import { POSITIONS } from '@eshan.rajapakshe/react-waypoint';
 
 console.log(POSITIONS.above);     // 'above'
 console.log(POSITIONS.inside);    // 'inside'
@@ -210,7 +216,7 @@ console.log(POSITIONS.invisible); // 'invisible'
 ### Lazy Loading Images
 
 ```tsx
-import { Waypoint } from '@modern/react-waypoint';
+import { Waypoint } from '@eshan.rajapakshe/react-waypoint';
 import { useState } from 'react';
 
 function LazyImage({ src, alt }: { src: string; alt: string }) {
@@ -233,7 +239,7 @@ function LazyImage({ src, alt }: { src: string; alt: string }) {
 ### Infinite Scroll
 
 ```tsx
-import { Waypoint } from '@modern/react-waypoint';
+import { Waypoint } from '@eshan.rajapakshe/react-waypoint';
 import { useState } from 'react';
 
 function InfiniteList() {
@@ -271,7 +277,7 @@ function InfiniteList() {
 ### Scroll Spy / Active Navigation
 
 ```tsx
-import { Waypoint } from '@modern/react-waypoint';
+import { Waypoint } from '@eshan.rajapakshe/react-waypoint';
 import { useState } from 'react';
 
 function ScrollSpy() {
@@ -307,7 +313,7 @@ function ScrollSpy() {
 ### Analytics Tracking
 
 ```tsx
-import { Waypoint } from '@modern/react-waypoint';
+import { Waypoint } from '@eshan.rajapakshe/react-waypoint';
 
 function TrackedContent({ id, children }: { id: string; children: React.ReactNode }) {
   const trackView = () => {
@@ -326,7 +332,7 @@ function TrackedContent({ id, children }: { id: string; children: React.ReactNod
 ### Animation Triggers
 
 ```tsx
-import { Waypoint } from '@modern/react-waypoint';
+import { Waypoint } from '@eshan.rajapakshe/react-waypoint';
 import { useState } from 'react';
 
 function AnimatedSection() {
@@ -354,7 +360,7 @@ This library is designed as a drop-in replacement for the original react-waypoin
 
 ```diff
 - import Waypoint from 'react-waypoint';
-+ import { Waypoint } from '@modern/react-waypoint';
++ import { Waypoint } from '@eshan.rajapakshe/react-waypoint';
 
 // All props work exactly the same!
 <Waypoint

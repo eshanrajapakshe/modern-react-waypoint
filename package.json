@@ -1,6 +1,6 @@
 {
   "name": "@eshan.rajapakshe/react-waypoint",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Modern, fully TypeScript implementation of react-waypoint with React 19 compatibility",
   "type": "module",
   "main": "./dist/index.cjs",

@@ -1,7 +1,7 @@
 {
   "name": "modern-react-waypoint-demo",
   "version": "1.0.0",
-  "description": "Demo for @modern/react-waypoint",
+  "description": "Demo for @eshan.rajapakshe/react-waypoint",
   "main": "index.tsx",
   "scripts": {
     "start": "react-scripts start",
@@ -10,7 +10,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "@modern/react-waypoint": "latest",
+    "@eshan.rajapakshe/react-waypoint": "latest",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-scripts": "^5.0.1"

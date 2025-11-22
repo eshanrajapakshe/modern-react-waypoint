@@ -1,148 +1,245 @@
 import { useState } from 'react';
-import { Waypoint } from '@modern/react-waypoint';
+import { Waypoint } from '@eshan.rajapakshe/react-waypoint';
 
 export default function App() {
-  const [logs, setLogs] = useState<string[]>([]);
+  const [activeSection, setActiveSection] = useState<string>('');
   const [imageLoaded, setImageLoaded] = useState(false);
-  const [section2Visible, setSection2Visible] = useState(false);
-  const [section3Visible, setSection3Visible] = useState(false);
+  const [animatedVisible, setAnimatedVisible] = useState(false);
+  const [offsetActive, setOffsetActive] = useState(false);
+  const [items, setItems] = useState(10);
+  const [loading, setLoading] = useState(false);
 
-  const addLog = (message: string) => {
-    const timestamp = new Date().toLocaleTimeString();
-    setLogs((prev) => [`[${timestamp}] ${message}`, ...prev].slice(0, 10));
+  const loadMore = () => {
+    if (loading) return;
+    setLoading(true);
+    setTimeout(() => {
+      setItems(prev => prev + 10);
+      setLoading(false);
+    }, 1000);
   };
 
   return (
     <div className="app">
-      <header className="header">
-        <h1>@modern/react-waypoint Demo</h1>
-        <p>Scroll down to see the Waypoint component in action!</p>
-      </header>
+      {/* Fixed Navigation */}
+      <nav className="nav">
+        <div className="nav-content">
+          <h1>@eshan.rajapakshe/react-waypoint</h1>
+          <div className="nav-links">
+            <a href="#intro" className={activeSection === 'intro' ? 'active' : ''}>Intro</a>
+            <a href="#basic" className={activeSection === 'basic' ? 'active' : ''}>Basic</a>
+            <a href="#lazy" className={activeSection === 'lazy' ? 'active' : ''}>Lazy Load</a>
+            <a href="#animation" className={activeSection === 'animation' ? 'active' : ''}>Animation</a>
+            <a href="#offset" className={activeSection === 'offset' ? 'active' : ''}>Offset</a>
+            <a href="#infinite" className={activeSection === 'infinite' ? 'active' : ''}>Infinite</a>
+          </div>
+        </div>
+      </nav>
 
-      <div className="log-panel">
-        <h3>Event Log (last 10 events)</h3>
-        <div className="logs">
-          {logs.length === 0 ? (
-            <div className="log-empty">Start scrolling to see events...</div>
-          ) : (
-            logs.map((log, i) => (
-              <div key={i} className="log-entry">
-                {log}
+      {/* Intro Section */}
+      <Waypoint
+        onEnter={() => setActiveSection('intro')}
+        topOffset="100px"
+        bottomOffset="100px"
+      >
+        <section id="intro" className="hero">
+          <div className="hero-content">
+            <h2>🎯 React Waypoint Demo</h2>
+            <p className="subtitle">Scroll down to see waypoints in action!</p>
+            <div className="features">
+              <div className="feature">
+                <span className="icon">⚡</span>
+                <h3>Fast</h3>
+                <p>IntersectionObserver API</p>
               </div>
-            ))
-          )}
-        </div>
-      </div>
-
-      <div className="content">
-        {/* Section 1: Basic Usage */}
-        <section className="section">
-          <h2>1. Basic Waypoint</h2>
-          <p>Scroll down to trigger the waypoint below:</p>
-          <div className="spacer" />
-          
-          <Waypoint
-            onEnter={() => addLog('✅ Section 1 entered viewport')}
-            onLeave={() => addLog('❌ Section 1 left viewport')}
-          >
-            <div className="waypoint-box">
-              <h3>🎯 Waypoint Trigger Zone</h3>
-              <p>This box triggers callbacks when entering/leaving viewport</p>
+              <div className="feature">
+                <span className="icon">🎨</span>
+                <h3>Flexible</h3>
+                <p>Customizable offsets</p>
+              </div>
+              <div className="feature">
+                <span className="icon">📦</span>
+                <h3>Lightweight</h3>
+                <p>&lt;5KB gzipped</p>
+              </div>
             </div>
-          </Waypoint>
+          </div>
         </section>
+      </Waypoint>
 
-        {/* Section 2: Lazy Loading Image */}
-        <section className="section">
-          <h2>2. Lazy Loading Image</h2>
-          <p>Image loads only when you scroll to it:</p>
-          <div className="spacer" />
-          
-          <Waypoint
-            onEnter={() => {
-              addLog('📸 Image waypoint entered - loading image');
-              setImageLoaded(true);
-            }}
-          >
-            <div className="image-container">
-              {imageLoaded ? (
-                <img
-                  src="https://picsum.photos/600/400"
-                  alt="Lazy loaded"
-                  className="lazy-image"
-                />
-              ) : (
-                <div className="image-placeholder">
-                  <p>🖼️ Image will load when visible...</p>
+      {/* Basic Waypoint */}
+      <Waypoint
+        onEnter={() => setActiveSection('basic')}
+        topOffset="100px"
+        bottomOffset="100px"
+      >
+        <section id="basic" className="demo-section">
+          <div className="section-header">
+            <h2>1️⃣ Basic Waypoint Detection</h2>
+            <p>Detects when element enters/leaves viewport</p>
+          </div>
+
+          <div className="demo-content">
+            <div className="spacer">👇 Scroll down 👇</div>
+
+            <Waypoint
+              onEnter={() => console.log('✅ Basic waypoint ENTERED')}
+              onLeave={() => console.log('❌ Basic waypoint LEFT')}
+            >
+              <div className="trigger-box basic">
+                <h3>🎯 Trigger Zone</h3>
+                <p>Watch the console when this enters/leaves viewport!</p>
+                <code>onEnter / onLeave</code>
+              </div>
+            </Waypoint>
+          </div>
+        </section>
+      </Waypoint>
+
+      {/* Lazy Loading */}
+      <Waypoint
+        onEnter={() => setActiveSection('lazy')}
+        topOffset="100px"
+        bottomOffset="100px"
+      >
+        <section id="lazy" className="demo-section alt">
+          <div className="section-header">
+            <h2>2️⃣ Lazy Loading Images</h2>
+            <p>Load images only when they become visible</p>
+          </div>
+
+          <div className="demo-content">
+            <div className="spacer">👇 Scroll to load image 👇</div>
+
+            <Waypoint onEnter={() => setImageLoaded(true)}>
+              <div className="image-demo">
+                {imageLoaded ? (
+                  <div className="image-loaded">
+                    <img
+                      src="https://picsum.photos/800/500?random=1"
+                      alt="Lazy loaded"
+                    />
+                    <p className="success">✅ Image loaded!</p>
+                  </div>
+                ) : (
+                  <div className="image-placeholder">
+                    <div className="spinner"></div>
+                    <p>Image will load when visible...</p>
+                  </div>
+                )}
+              </div>
+            </Waypoint>
+          </div>
+        </section>
+      </Waypoint>
+
+      {/* Animation on Scroll */}
+      <Waypoint
+        onEnter={() => setActiveSection('animation')}
+        topOffset="100px"
+        bottomOffset="100px"
+      >
+        <section id="animation" className="demo-section">
+          <div className="section-header">
+            <h2>3️⃣ Scroll Animations</h2>
+            <p>Trigger animations when elements enter viewport</p>
+          </div>
+
+          <div className="demo-content">
+            <div className="spacer">👇 Scroll to animate 👇</div>
+
+            <Waypoint onEnter={() => setAnimatedVisible(true)}>
+              <div className={`animated-card ${animatedVisible ? 'visible' : ''}`}>
+                <h3>✨ Animated Content</h3>
+                <p>This card slides in with a smooth animation!</p>
+                <div className="animation-demo">
+                  <div className="box box1"></div>
+                  <div className="box box2"></div>
+                  <div className="box box3"></div>
                 </div>
-              )}
-            </div>
-          </Waypoint>
+              </div>
+            </Waypoint>
+          </div>
         </section>
+      </Waypoint>
 
-        {/* Section 3: Animation on Scroll */}
-        <section className="section">
-          <h2>3. Animation on Scroll</h2>
-          <p>Content animates when entering viewport:</p>
-          <div className="spacer" />
-          
-          <Waypoint
-            onEnter={() => {
-              addLog('🎬 Animation triggered');
-              setSection2Visible(true);
-            }}
-          >
-            <div className={`animated-box ${section2Visible ? 'visible' : ''}`}>
-              <h3>✨ Animated Content</h3>
-              <p>This box slides in when you scroll to it!</p>
-            </div>
-          </Waypoint>
+      {/* Offset Detection */}
+      <Waypoint
+        onEnter={() => setActiveSection('offset')}
+        topOffset="100px"
+        bottomOffset="100px"
+      >
+        <section id="offset" className="demo-section alt">
+          <div className="section-header">
+            <h2>4️⃣ Custom Offsets</h2>
+            <p>Trigger waypoints before/after entering viewport</p>
+          </div>
+
+          <div className="demo-content">
+            <div className="spacer">👇 Triggers 200px early 👇</div>
+
+            <Waypoint
+              topOffset="200px"
+              bottomOffset="200px"
+              onEnter={() => setOffsetActive(true)}
+              onLeave={() => setOffsetActive(false)}
+            >
+              <div className={`trigger-box offset ${offsetActive ? 'active' : ''}`}>
+                <h3>⏰ Early Detection</h3>
+                <p>This triggers 200px before entering viewport!</p>
+                <div className={`status-indicator ${offsetActive ? 'active' : ''}`}>
+                  {offsetActive ? '🟢 ACTIVE' : '⚪ INACTIVE'}
+                </div>
+              </div>
+            </Waypoint>
+          </div>
         </section>
+      </Waypoint>
 
-        {/* Section 4: With Offsets */}
-        <section className="section">
-          <h2>4. Waypoint with Offsets</h2>
-          <p>Triggers 100px before entering viewport:</p>
-          <div className="spacer" />
-          
-          <Waypoint
-            topOffset="100px"
-            bottomOffset="100px"
-            onEnter={() => {
-              addLog('⚡ Early trigger (100px offset)');
-              setSection3Visible(true);
-            }}
-            onLeave={() => setSection3Visible(false)}
-          >
-            <div className={`waypoint-box ${section3Visible ? 'active' : ''}`}>
-              <h3>⏰ Early Detection Zone</h3>
-              <p>Triggered 100px before entering viewport</p>
-              <p className="status">
-                Status: {section3Visible ? '🟢 Active' : '⚪ Inactive'}
-              </p>
+      {/* Infinite Scroll */}
+      <Waypoint
+        onEnter={() => setActiveSection('infinite')}
+        topOffset="100px"
+        bottomOffset="100px"
+      >
+        <section id="infinite" className="demo-section">
+          <div className="section-header">
+            <h2>5️⃣ Infinite Scroll</h2>
+            <p>Load more content as you scroll</p>
+          </div>
+
+          <div className="demo-content">
+            <div className="items-grid">
+              {Array.from({ length: items }, (_, i) => (
+                <div key={i} className="item">
+                  <div className="item-number">{i + 1}</div>
+                  <p>Item {i + 1}</p>
+                </div>
+              ))}
             </div>
-          </Waypoint>
-        </section>
 
-        {/* Section 5: Infinite Scroll Simulation */}
-        <section className="section">
-          <h2>5. Infinite Scroll Trigger</h2>
-          <p>Simulates loading more content:</p>
-          <div className="spacer" />
-          
-          <Waypoint
-            onEnter={() => addLog('📦 Load more content triggered')}
-          >
-            <div className="load-more-trigger">
-              <p>🔄 Scroll here to load more items...</p>
-            </div>
-          </Waypoint>
+            <Waypoint onEnter={loadMore}>
+              <div className="load-trigger">
+                {loading ? (
+                  <div className="loading">
+                    <div className="spinner"></div>
+                    <p>Loading more items...</p>
+                  </div>
+                ) : (
+                  <p>🔄 Scroll here to load more</p>
+                )}
+              </div>
+            </Waypoint>
+          </div>
         </section>
+      </Waypoint>
 
-        <div className="footer">
-          <p>End of demo - scroll back up to see events again!</p>
-        </div>
-      </div>
+      {/* Footer */}
+      <footer className="footer">
+        <p>🎉 End of demo - scroll back up to see navigation update!</p>
+        <a href="https://github.com/eshanrajapakshe/modern-react-waypoint" target="_blank" rel="noopener noreferrer">
+          View on GitHub
+        </a>
+      </footer>
     </div>
   );
 }

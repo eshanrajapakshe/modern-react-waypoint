@@ -177,12 +177,12 @@ export function Waypoint({
       ref: refCallback,
     });
   } else {
-    // For composite components, wrap in a span
-    // This ensures we can always attach a ref
+    // For composite components, wrap in a div
+    // This ensures we can always attach a ref and IntersectionObserver works
     return (
-      <span ref={refCallback} style={{ display: 'contents' }}>
+      <div ref={refCallback}>
         {child}
-      </span>
+      </div>
     );
   }
 }
