@@ -1,3 +1,4 @@
+
 # @modern/react-waypoint
 
 > Modern, fully TypeScript implementation of react-waypoint with React 19 compatibility
